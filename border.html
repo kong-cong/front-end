@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高亮边框</title>
+    <style>
+        :root {
+            color-scheme: light;
+            /* 变量参数 */
+
+            /* 元素的背景色 */
+            /* --color-bg: ; */
+
+            /* 元素的前景色 */
+            /* --color: ; */
+
+            /* 元素的圆角 */
+            /* --border-radius: ; */
+
+            /* 元素的边框颜色 */
+            /* --border-color: ; */
+
+            /* 元素的边框宽度 */
+            /* --border-width: ; */
+
+            /* 元素的内边距 */
+            /* --padding: ; */
+
+            /* 元素的垂直对齐方式 */
+            /* --vertical-align: ; */
+
+            /* 元素的盒模型 */
+            /* --box-sizing: ; */
+
+            /* 获取焦点时，边框的颜色，本质是一个背景图 */
+            /* --border-focus-color: linear-gradient(to right, skyblue); */
+
+            /* 获取焦点时，边框的宽度 */
+            /* --border-focus-size: ; */
+
+            /* 获取焦点时，边框开始扩展的位置 */
+            /* --border-focus-start: ; */
+
+
+        }
+
+        .input-text {
+            /* all: revert; */
+            font-size: var(--font-size, 1rem);
+            background-color: var(--color-bg, transparent);
+            color: var(--color, currentColor);
+            border-radius: var(--border-radius, 0.4em);
+            border: var(--border-width, 1px) solid var(--border-color, rgb(from currentColor r g b / 0.3));
+            padding: var(--padding, 0.5em 0.7em);
+            outline: none;
+            width: auto;
+            overflow: hidden;
+            box-sizing: var(--box-sizing, border-box);
+            vertical-align: var(--vertical-align, middle);
+        }
+
+        .border-highlight-bottom-focus,
+        .border-hl-b-focus {
+            background-image: var(--border-focus-color, linear-gradient(to right, currentColor));
+            background-size: 0% var(--border-focus-size, calc(var(--border-width, 1px)*2));
+            background-position: var(--border-focus-start, left) calc(100% + var(--border-width, 1px));
+            background-repeat: no-repeat;
+            transition: background-size 0.3s ease-in-out;
+
+            &:focus-within {
+                background-size: 100% var(--border-focus-size, calc(var(--border-width, 1px)*2));
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <input type=" text" placeholder="用户名" class="input-text border-hl-b-focus"
+        style="display: block;background-image: linear-gradient(to right,red);width: auto;">
+    <div>
+        <input type="text" placeholder="用户名" class="input-text border-hl-b-focus"
+            style="background-position:  center bottom;">
+        <input type="text" placeholder="用户名" class="input-text border-hl-b-focus">
+        <textarea name="description" id="description" class="input-text border-hl-b-focus"></textarea>
+    </div>
+</body>
+
+</html>
