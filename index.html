@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主题切换</title>
+    <style>
+        :root {
+            color-scheme: light dark;
+            --kc-color-base: gray;
+            --kc-color-mix: color-mix(in hsl , var(--kc-color-base), canvas);
+        }
+
+
+        :root[data-theme="dark"] {
+            color-scheme: dark;
+
+            --kc-color-primary: canvas;
+            --kc-color-secondary: var(--kc-color-mix);
+        }
+
+        :root[data-theme="light"] {
+            color-scheme: light;
+
+            --kc-color-primary: var(--kc-color-mix);
+            --kc-color-secondary: canvas;
+        }
+
+
+        @media(prefers-color-scheme: dark) {
+            :root {
+                --kc-color-primary: canvas;
+                --kc-color-secondary: var(--kc-color-mix);
+            }
+
+        }
+
+        @media(prefers-color-scheme: light) {
+            :root {
+                --kc-color-primary: var(--kc-color-mix);
+                --kc-color-secondary: canvas;
+            }
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header,
+        footer {
+            background-color: var(--kc-color-primary);
+            height: 50px;
+        }
+
+        main {
+            flex: 1;
+            background-color: var(--kc-color-secondary);
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: right;
+            gap: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <select onchange="changeTheme(this.value)">
+            <option value="auto">Auto</option>
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+        </select>
+
+        <input type="color" oninput="changeColor(event)">
+    </header>
+    <main>
+        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo beatae repellendus aliquam atque? Rem sunt
+            debitis doloribus veniam dignissimos magni ut sapiente voluptas quidem necessitatibus, officiis illum
+            consectetur commodi laborum!</div>
+    </main>
+    <footer style="height: 100px;"></footer>
+
+    <script>
+        function changeTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+        }
+
+        function changeColor(event) {
+            const color = event.target.value;
+            document.documentElement.style.setProperty('--kc-color-base', color);
+        }
+
+    </script>
+</body>
+
+</html>
